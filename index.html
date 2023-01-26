@@ -2,7 +2,8 @@
 <html>
   <head>
     <title>COP 4331 Project</title>
-    <link rel="stylesheet" type="text/css" href="styles.css" />
+    <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <script type="text/javascript" src="js/code.js"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap"
       rel="stylesheet"
@@ -15,30 +16,33 @@
       <div class="signup">
         <form>
           <label for="chk" class = "signup-text" aria-hidden="true">Sign up</label>
-          <input type="text" name="txt" placeholder="First Name" required="" />
-          <input type="text" name="txt" placeholder="Last Name" required="" />
-          <input type="text" name="txt" placeholder="User name" required="" />
+          <input id = "firstName" type="text" name="txt" placeholder="First Name" required="" />
+          <input id = "lastName" type="text" name="txt" placeholder="Last Name" required="" />
+          <input id = "userName" type="text" name="txt" placeholder="User name" required="" />
           <input
+            id = "password"
             type="password"
             name="pswd"
             placeholder="Password"
-            required=""
+            required =""
           />
-          <button>Sign up</button>
+          <button type ="button" onclick="doSignUp()"Sign up</button>
         </form>
       </div>
 
       <div class="login">
         <form>
-          <label for="chk" aria-hidden="true">Login</label>
-          <input type="text" name="txt" placeholder="User name" required="" />
+          <label for="chk" aria-hidden="true">Login Now</label>
+          <input id = "loginName" type="text" name="txt" placeholder="User name" required="" />
           <input
+            id = "loginPassword"
             type="password"
             name="pswd"
             placeholder="Password"
-            required=""
+            required = ""
           />
-          <button>Login</button>
+          <button type ="button" onclick="doLogin()">Login</button>
+          <span class="text" id="loginResult"></span>
         </form>
       </div>
     </div>
