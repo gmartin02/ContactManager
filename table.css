@@ -1,0 +1,48 @@
+.addCont
+{
+    width: 20%;
+    height: 20px;
+    background: #e0dede;
+    display: flex;
+
+    justify-content: center;
+   /* 
+    margin: 20px auto;
+    padding: 10px;*/
+    border: none;
+    outline: none;
+    border-radius: 5px;
+}
+        
+        
+#btnAdd
+{
+    width: 9%;
+    height: 40px;
+    margin-left: 115px;
+    /*margin: 10px auto;*/
+    justify-content: flex-start;
+    display: block;
+    color: #fff;
+    background: #32cd32;
+    font-size: 1em;
+    font-weight: bold;
+    margin-top: 20px;
+    outline: none;
+    border: none;
+    border-radius: 5px;
+    transition: .2s ease-in;
+    cursor: pointer;
+}
+        
+        
+#tbl
+{
+    width: 80%;
+            
+}
+        
+#inputInfo
+{
+    margin-left: 60px;
+}
