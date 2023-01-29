@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+    
+    <head>
+        <title>COP 4331 Project</title>
+        <link rel="stylesheet" type="text/css" href="table.css">
+        <script type="text/javascript" src="contScript.js"></script>    
+    </head>
+    
+    <body>
+        <div class="container">
+            <h1 align="center">Contact Manager</h1>
+
+            <form method="POST" name="sample">
+                <br>
+                <div id="inputInfo">
+                    First Name: <input class="addCont" type="text" name="fName">
+                    Last Name: <input class="addCont" type="text" name="lName">
+                    Phone Number: <input class="addCont" type="text" name="phNumber">
+                    Email: <input class="addCont" type="text" name="email">
+                    Street Address <input class="addCont" type="text" name="address">
+                </div>
+                <br>
+                <input id="btnAdd" type="button" name="add" value="Add Contact" onclick="addContact();">
+                <br>
+                <hr>
+                
+                <table align="center" id="tbl" class="table" border="1">
+                    <thead>
+                        <th>First Name</th> 
+                        <th>Last Name</th>
+                        <th>Phone Number</th>
+                        <th>Email</th>
+                        <th>Street Address</th>
+                        <th>Delete</th>
+                        <th>Update</th>
+
+                    </thead>
+
+                    <tbody></tbody>
+                </table>
+
+            </form>
+        </div>
+        
+        
+    </body>
+     
+</html>
