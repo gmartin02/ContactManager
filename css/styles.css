@@ -29,7 +29,7 @@ label{
 	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
-	margin: 60px;
+	margin: 30px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: .5s ease-in-out;
@@ -46,6 +46,7 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
+
 button{
 	width: 60%;
 	height: 40px;
@@ -67,19 +68,67 @@ button:hover{
 	background: #727272;
 }
 .login{
-	height: 460px;
+	height: 470px;
 	background: #eee;
 	border-radius: 60% / 10%;
-	transform: translateY(-180px);
+	transform: translateY(-110px);
 	transition: .8s ease-in-out;
 }
+
+
 .login label{
 	color: #757575;
 	transform: scale(.6);
 }
+#explanation,
+#explanationUser {
+    display: none;
+    color: #fff;
+    position: relative;
+	line-height: 0.5;
+    text-align: center;
+}
+
+#explanation>p {
+    position: relative;
+	line-height: 0;
+
+}
+
+.valid {
+    color: #009345;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+
+}
+
+/* Add a red text color and a sad face when the requirements are wrong */
+.invalid {
+    color: rgb(233, 106, 106);
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+
+}
+
+/* for the optional number, hyphen, and underscore in username signup field */
+.opt {
+    color: rgb(250, 250, 121);
+}
+
+.opt:before {
+    position: relative;
+    left: -35px;
+
+}
 
 #chk:checked ~ .login{
-	transform: translateY(-500px);
+	transform: translateY(-480px);
 }
 #chk:checked ~ .login label{
 	transform: scale(1);	
@@ -87,6 +136,4 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
-.signup-text{
-	margin-bottom: 30px;
-}
+
