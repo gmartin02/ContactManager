@@ -337,9 +337,12 @@ function addContact() {
   td5.innerHTML = address;
 
   td6.innerHTML =
-    '<input type="button" name="del" value="Delete" onclick="delCon(this);" class="btn btn-danger">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
+
+  // td7.innerHTML =
+  //   '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
   td7.innerHTML =
-    '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
   document.getElementById("tbl").appendChild(tr);
   document.getElementById("addMe").reset();
 
@@ -371,9 +374,10 @@ function UpCon(con) {
   td5.innerHTML = '<input type="text" name="address1">';
 
   td6.innerHTML =
-    '<input type="button" name="del" value="Delete" onclick="delCon(this);" class="btn btn-danger">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
+
   td7.innerHTML =
-    '<input type="button" name="up" value="Update" onclick="changeCon(this);" class="btn btn-primary">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
 
   document.getElementById("tbl").replaceChild(tr, s);
 }
@@ -403,9 +407,10 @@ function changeCon(con) {
   td5.innerHTML = address;
 
   td6.innerHTML =
-    '<input type="button" name="del" value="Delete" onclick="delCon(this);" class="btn btn-danger">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
+
   td7.innerHTML =
-    '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
+    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
 
   document.getElementById("tbl").replaceChild(tr, s);
 }
@@ -424,17 +429,33 @@ function searchContacts() {
   for (let i = 0; i < tr.length; i++) {
     const fN = tr[i].getElementsByTagName("td")[0];
     const lN = tr[i].getElementsByTagName("td")[1];
-
-    if (fN && lN) {
+    const pN = tr[i].getElementsByTagName("td")[2];
+    const email = tr[i].getElementsByTagName("td")[3];
+    const address = tr[i].getElementsByTagName("td")[4];
+    console.log("Hello");
+    if (fN && lN && pN && email && address) {
       const txtValue_fn = fN.textContent || fN.innerText;
       const txtValue_ln = lN.textContent || lN.innerText;
+      const txtValue_pn = pN.textContent || pN.innerText;
+      const txtValue_email = email.textContent || email.innerHTML;
+      const txtValue_address = address.textContent || address.innerHTML;
       tr[i].style.display = "none";
 
       for (let j = 0; j < selections.length; j++) {
         if (txtValue_fn.toUpperCase().indexOf(selections[j]) > -1) {
           tr[i].style.display = "";
         }
-        if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
+        if (txtValue_ln.toUpperCase().indexOf(selections[j]) > -1) {
+          tr[i].style.display = "";
+        }
+        if (txtValue_pn.toUpperCase().indexOf(selections[j]) > -1) {
+          tr[i].style.display = "";
+        }
+
+        if (txtValue_email.toUpperCase().indexOf(selections[j]) > -1) {
+          tr[i].style.display = "";
+        }
+        if (txtValue_address.toUpperCase().indexOf(selections[j]) > -1) {
           tr[i].style.display = "";
         }
       }
