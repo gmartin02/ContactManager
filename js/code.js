@@ -313,6 +313,7 @@ function searchColor() {
 // -------------  Contact Page -------------- //
 function addContact() {
   /*var rollno=document.sample.rollno.value;*/
+
   var fName = document.sample.fName.value;
   var lName = document.sample.lName.value;
   var phNumber = document.sample.phNumber.value;
@@ -340,6 +341,9 @@ function addContact() {
   td7.innerHTML =
     '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
   document.getElementById("tbl").appendChild(tr);
+  document.getElementById("addMe").reset();
+
+  showTable();
 }
 
 function UpCon(con) {
@@ -439,13 +443,14 @@ function searchContacts() {
 }
 function showTable() {
   var x = document.getElementById("addMe");
-  var contacts = document.getElementById("table");
+  var contacts = document.getElementById("tab");
+
   if (x.style.display === "none") {
     x.style.display = "block";
     contacts.style.display = "none";
   } else {
     x.style.display = "none";
-    contacts.style.display = "block";
+    contacts.style.display = "flex";
   }
 }
 // ----------------------------- //
