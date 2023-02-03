@@ -1,4 +1,4 @@
-const urlBase = "Input here";
+const urlBase = "http://my-contacts.xyz/";
 const extension = "php";
 
 let userId = 0;
@@ -432,7 +432,7 @@ function searchContacts() {
     const pN = tr[i].getElementsByTagName("td")[2];
     const email = tr[i].getElementsByTagName("td")[3];
     const address = tr[i].getElementsByTagName("td")[4];
-    console.log("Hello");
+
     if (fN && lN && pN && email && address) {
       const txtValue_fn = fN.textContent || fN.innerText;
       const txtValue_ln = lN.textContent || lN.innerText;
