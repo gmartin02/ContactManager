@@ -1,4 +1,4 @@
-const urlBase = "Input here";
+const urlBase = "http://my-contacts.xyz/";
 const extension = "php";
 
 let userId = 0;
