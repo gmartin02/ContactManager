@@ -13,7 +13,7 @@
 	}
 	else
 	{
-		$stmt = $conn->prepare("SELECT ID,FirstName,LastName,PhoneNumber,Email,Address FROM Contacts WHERE FirstName=? AND LastName=? AND UserID=?");
+		$stmt = $conn->prepare("SELECT ID,FirstName,LastName,PhoneNumber,Email,Address FROM Contacts WHERE (FirstName=? OR LastName=?) AND UserID=?");
 		$stmt->bind_param("ssi", $firstname, $lastname, $userid);
 		$stmt->execute();
 		$result = $stmt->get_result();
