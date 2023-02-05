@@ -2,7 +2,7 @@
 <html>
   <head>
     <title>COP 4331 Project</title>
-    <link rel="stylesheet" type="text/css" href="/css/table.css" />
+    <link rel="stylesheet" type="text/css" href="css/table.css" />
     <link
       href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
       rel="stylesheet"
@@ -83,39 +83,44 @@
               >Add Contact</label
             >
             <input
+              class="addContacts"
               type="text"
               name="fName"
               placeholder="First Name"
               required=""
-              class="addCont"
+              id="firstName"
             />
             <input
+              class="addContacts"
               type="text"
               name="lName"
               placeholder="Last Name"
               required=""
-              class="addCont"
+              id="lastName"
             />
             <input
               type="text"
               name="phNumber"
               placeholder="XXX-XXX-XXXX"
               required=""
-              class="addCont"
+              id="phNumber"
+              class="addContacts"
             />
             <input
               type="text"
               name="email"
               placeholder="name@email.com"
               required=""
-              class="addCont"
+              id="email"
+              class="addContacts"
             />
             <input
               type="text"
               name="address"
               placeholder="Street Address"
               required=""
-              class="addCont"
+              id="address"
+              class="addContacts"
             />
             <button type="button" onclick="addContact()">Add</button>
           </div>
