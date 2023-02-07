@@ -29,7 +29,7 @@ label{
 	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
-	margin: 60px;
+	margin: 30px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: .5s ease-in-out;
@@ -46,6 +46,7 @@ input{
 	outline: none;
 	border-radius: 5px;
 }
+
 button{
 	width: 60%;
 	height: 40px;
@@ -67,19 +68,70 @@ button:hover{
 	background: #727272;
 }
 .login{
-	height: 460px;
+	height: 470px;
 	background: #eee;
 	border-radius: 60% / 10%;
-	transform: translateY(-180px);
+	transform: translateY(-110px);
 	transition: .8s ease-in-out;
 }
+
+
 .login label{
 	color: #757575;
 	transform: scale(.6);
 }
+#checkPassword,
+#checkUser {
+    display: none;
+    color: #fff;
+    position: relative;
+	line-height: 0.5;
+    text-align: center;
+}
+
+#checkPassword>p {
+    position: relative;
+	line-height: 0;
+
+}
+#loginResult {
+	display: flex;
+	justify-content: center;
+	color: #009345;
+}
+
+.valid {
+    color: #009345;
+}
+
+.valid:before {
+    position: relative;
+    left: -35px;
+
+}
+
+.invalid {
+    color: rgb(233, 106, 106);
+}
+
+.invalid:before {
+    position: relative;
+    left: -35px;
+
+}
+
+.opt {
+    color: rgb(250, 250, 121);
+}
+
+.opt:before {
+    position: relative;
+    left: -35px;
+
+}
 
 #chk:checked ~ .login{
-	transform: translateY(-500px);
+	transform: translateY(-480px);
 }
 #chk:checked ~ .login label{
 	transform: scale(1);	
@@ -87,6 +139,4 @@ button:hover{
 #chk:checked ~ .signup label{
 	transform: scale(.6);
 }
-.signup-text{
-	margin-bottom: 30px;
-}
+
