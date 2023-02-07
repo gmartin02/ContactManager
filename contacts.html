@@ -36,6 +36,11 @@
   <body>
     <div class="container">
       <h1 align="center">Contact Manager</h1>
+      <div class="logOut" onclick="doLogout()">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <div>Log Out</div>
+      </div>
+      
       <div class="accessUIDiv">
         <div class="column">
           <div class="search-container">
@@ -59,13 +64,6 @@
           </div>
         </div>
         <div class="column">
-          <button type="button" onclick="loadContacts()">
-            <i
-              class="fa fa-refresh"
-              style="font-size: 30px; color: rgba(42, 42, 42, 0.9)"
-              aria-hidden="true"
-            ></i>
-          </button>
         </div>
         <div class="column">
           <button type="button" onclick="showTable()">

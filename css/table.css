@@ -5,6 +5,19 @@ body{
 	font-family: 'Jost', sans-serif;
 	background: linear-gradient(to bottom, #545454, #383838, #000000);
 }
+.logOut{
+    color:#fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    float: right;
+    margin-right: 20px;
+    padding: 10px 20px;
+    background-color: rgb(97, 97, 97);
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
 
 .container h1{
     color: #fff;
