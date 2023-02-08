@@ -4,6 +4,11 @@ body{
 	min-height: 100vh;
 	font-family: 'Jost', sans-serif;
 	background: linear-gradient(to bottom, #545454, #383838, #000000);
+    background-image: url("https://images.unsplash.com/photo-1629194898512-b6b8697063ac?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1662&q=80")
+
+}
+.header{
+    font-size: 2.3em;
 }
 .logOut{
     color:#fff;
@@ -11,7 +16,7 @@ body{
     align-items: center;
     gap: 5px;
     float: right;
-    margin-right: 20px;
+    margin: 0px 20px;
     padding: 10px 20px;
     background-color: rgb(97, 97, 97);
     cursor: pointer;
@@ -23,44 +28,35 @@ body{
     color: #fff;
 }
 .accessUIDiv {
-    margin: 10px;
-    padding: 10px 10px;
     text-align: center;
     align-self: center;
-}
-
-.column{
-    display: inline-block;
-    vertical-align: middle;
-    padding: 10px 10px;
-    
-}
-
-.column button{
-    position: relative;
-    background: #ffffff;
-    border-radius: 50%;
-    padding: 10px;
-    margin: 10px;
-    width: 40px;
-    height: 40px;
-    font-size: 10px;
     display: flex;
-    border: none;
     justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transition: all 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+    text-align: center;
 }
+.addUserClick{
+    color:#fff;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    float: right;
+    margin: 0px 20px;
+    padding: 10px 20px;
+    background-color: rgb(97, 97, 97);
+    cursor: pointer;
+    border-radius: 20px;
+    box-shadow: 0 10px 10px rgba(0, 0, 0, 0.1);
+}
+
+
+
 /* search bar formatting */
 .search-container{
     background-color: #fff;
     height: 30px;
     width: 400px;
     border-radius: 30px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,7 +89,7 @@ body{
 }
 .addContacts{
 	width: 350px;
-	height: 500px;
+	height: 550px;
 	background: rgb(65, 65, 65) ;
 	overflow: hidden;
 	border-radius: 10px;
@@ -104,7 +100,7 @@ body{
 	font-size: 2.3em;
 	justify-content: center;
 	display: flex;
-	margin: 30px;
+	margin: 20px;
 	font-weight: bold;
 	cursor: pointer;
 	transition: .5s ease-in-out;
@@ -151,7 +147,7 @@ body{
 }
 
         
-        
+
 #tbl
 {
     width: 80%;
@@ -160,14 +156,14 @@ body{
 
 .table{
     color:#fff;
-    background-color: #6d5c5c;
-
+    border-bottom: #fff;
     
 }
 .border_bottom {
     border-collapse: 1px solid rgb(255, 255, 255);
 }
 #tab {
+    margin-top: 10px;
     text-align: center;
     display: flex;
     justify-content: center;
