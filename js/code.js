@@ -29,6 +29,7 @@ function doLogin() {
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
+        console.log(this.status);
         let jsonObject = JSON.parse(xhr.responseText);
         userId = jsonObject.id;
         console.log(this.status);
@@ -348,7 +349,7 @@ function UpCon(con) {
     "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
 
   td7.innerHTML =
-    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+    "<button type='button' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
 
   document.getElementById("tbl").replaceChild(tr, s);
 }
@@ -381,7 +382,7 @@ function changeCon(con) {
     "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
 
   td7.innerHTML =
-    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+    "<button type='button' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
 
   document.getElementById("tbl").replaceChild(tr, s);
 }
@@ -442,7 +443,7 @@ function addContact() {
   // td7.innerHTML =
   //   '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
   td7.innerHTML =
-    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+    "<button type='button' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
   document.getElementById("tbl").appendChild(tr);
   document.getElementById("addMe").reset();
 
