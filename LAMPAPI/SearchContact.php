@@ -16,7 +16,6 @@
 		$stmt = $conn->prepare("select * from Contacts where (FirstName like ? OR LastName like ?) AND UserID=?");
 		$stmt->bind_param("ssi", $fullname, $fullname, $userid);
 		$stmt->execute();
-		
 		$result = $stmt->get_result();
 		
 		while($row = $result->fetch_assoc())
@@ -26,7 +25,7 @@
 				$searchResults .= ",";
 			}
 			$searchCount++;
-			$searchResults .= '{"ID":"'. $row["ID"].'",'.'"FirstName":"'. $row["FirstName"].'",'.'"LastName":"'. $row["LastName"].'","PhoneNumber":"'. $row["PhoneNumber"].'","Email":"'. $row["Email"].'","Address":"'. $row["Address"].'"}';
+			$searchResults .= '{"ID":'. $row["ID"].','.'"FirstName":"'. $row["FirstName"].'",'.'"LastName":"'. $row["LastName"].'","PhoneNumber":"'. $row["PhoneNumber"].'","Email":"'. $row["Email"].'","Address":"'. $row["Address"].'"}';
 		}
 		
 		if( $searchCount == 0 )

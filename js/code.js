@@ -14,8 +14,13 @@ function doLogin() {
   let login = document.getElementById("loginName").value;
   let password = document.getElementById("loginPassword").value;
   //	var hash = md5( password );
-
-  document.getElementById("loginResult").innerHTML = "";
+  if (!login|| !password)
+  {
+    console.log("Empty form fields");
+    document.getElementById("loginResult").innerHTML = "Please enter a valid username/password";
+    return;
+  }
+  
 
   let tmp = { login: login, password: password };
   //	var tmp = {login:login,password:hash};
@@ -29,23 +34,21 @@ function doLogin() {
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        console.log(this.status);
         let jsonObject = JSON.parse(xhr.responseText);
         userId = jsonObject.id;
-        console.log(this.status);
         if (userId < 1) {
           document.getElementById("loginResult").innerHTML =
             "User/Password combination incorrect";
           console.log("Incorrect Login");
           return;
         }
+        document.getElementById("loginResult").style.color = "#009345"
         document.getElementById("loginResult").innerHTML = "Success";
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;
-
+        console.log("Login successful")
         saveCookie();
-
-        window.location.href = "contacts.html";
+        window.location.href = "contacts.html"
       }
     };
     xhr.send(jsonPayload);
@@ -65,6 +68,14 @@ function doSignUp() {
   console.log(username);
   console.log(password);
   //var hash = md5(password);
+  
+  // Temporary method of checking if any input fields are empty
+  if (!firstName || !lastName || !username || !password)
+  {
+    document.getElementById("signupResult").innerHTML ="Please enter all required information";
+    return;
+  }
+
   let tmp = {
     firstname: firstName,
     lastname: lastName,
@@ -85,7 +96,6 @@ function doSignUp() {
       if (this.readyState != 4) {
         return;
       }
-
       if (this.status == 409) {
         document.getElementById("signupResult").innerHTML =
           "User already exists";
@@ -95,9 +105,9 @@ function doSignUp() {
       if (this.status == 200) {
         let jsonObject = JSON.parse(xhr.responseText);
         userId = jsonObject.id;
+        document.getElementById("signupResult").style.color = "green"
         document.getElementById("signupResult").innerHTML =
           "Successful Sign Up";
-        console.log("Hello");
         firstName = jsonObject.firstName;
         lastName = jsonObject.lastName;
         saveCookie();
@@ -249,7 +259,8 @@ function checkPassword() {
   let pSpecInput = document.getElementById("passSpec");
   let pLenInput = document.getElementById("passLen");
   let totalform = document.getElementById("wholeForm");
-
+  let contactForm = document.getElementById("inputInfo");
+  contactForm.style.minHeight = "570px"
   var temp = document.getElementById("checkPassword");
   temp.style.display = "block";
   totalform.style.minHeight = "570px";
@@ -317,53 +328,54 @@ function doLogout() {
 
 
 function delCon(con) {
-  var s = con.parentNode.parentNode;
-  let contactIdString = $(con).closest("tr").attr('id') 
-  let contactId = (contactIdString.split('"'))[1];
-  contactId = parseInt(contactId);
-  console.log(contactId); 
-  // console.log(Number(contactId))
-  // console.log(+contactId)
-  // let c_id = +contactId
-  // console.log(c_id)
-  let tmp = {id:contactId}
-  console.log(tmp)
-	let jsonPayload = JSON.stringify(tmp);
-	let url = urlBase + '/DeleteContact.' + extension;
-	let xhr = new XMLHttpRequest();
-	xhr.open("POST", url, true);
-	xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
-	try
-	{
-		xhr.onreadystatechange = function() 
-		{
-			if (this.readyState == 4 && this.status == 200) 
-			{
-        console.log(xhr.responseText)
-				console.log("contact has been deleted")
-			}
-		};
-		xhr.send(jsonPayload);
-	}
-	catch(err)
-	{
-		console.log("contact has failed to delete")
-	}
-  s.parentNode.removeChild(s);
+  if(confirm("Are you sure you want to delete this contact?")){
+    var s = con.parentNode.parentNode;
+    let contactIdString = $(con).closest("tr").attr('id') 
+    console.log("contact id string is:")
+    console.log(contactIdString) 
+    // console.log(Number(contactId))
+    // console.log(+contactId)
+    // let c_id = +contactId
+    // console.log(c_id)
+    let tmp = {id:contactIdString}
+    console.log(tmp)
+    let jsonPayload = JSON.stringify(tmp);
+    let url = urlBase + '/DeleteContact.' + extension;
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+    try
+    {
+      xhr.onreadystatechange = function() 
+      {
+        if (this.readyState == 4 && this.status == 200) 
+        {
+          console.log(xhr.responseText)
+          console.log("contact has been deleted")
+        }
+      };
+      xhr.send(jsonPayload);
+    }
+    catch(err)
+    {
+      console.log("contact has failed to delete")
+    }
+    s.parentNode.removeChild(s);
+  }
 }
   
 function UpCon(con) {
   let contactIdString = $(con).closest("tr").attr('id');
-	var fName = document.sample.fName.value;
-	var lName = document.sample.lName.value;
-	var phNumber = document.sample.phNumber.value;
-	var email = document.sample.email.value;
-	var address = document.sample.address.value;
-	console.log(fName,lName,phNumber,email,address)
-  
+  let contactRow = document.getElementById(contactIdString)
+  let fName = contactRow.childNodes[0].textContent
+  let lName = contactRow.childNodes[1].textContent
+  let phNumber = contactRow.childNodes[2].textContent
+  let email = contactRow.childNodes[3].textContent
+  let address = contactRow.childNodes[4].textContent
 	var s = con.parentNode.parentNode;
 	var tr = document.createElement("tr");
   tr.setAttribute("id",contactIdString)
+  console.log(lName)
   
 	var td1 = tr.appendChild(document.createElement("td"));
 	var td2 = tr.appendChild(document.createElement("td"));
@@ -373,32 +385,30 @@ function UpCon(con) {
 	var td6 = tr.appendChild(document.createElement("td"));
 	var td7 = tr.appendChild(document.createElement("td"));
   
-	td1.innerHTML = '<input type="text" id="fName1">';
-	td2.innerHTML = '<input type="text" id="lName1">';
-	td3.innerHTML = '<input type="text" id="phNumber1">';
-	td4.innerHTML = '<input type="text" id="email1">';
-	td5.innerHTML = '<input type="text" id="address1">';
-  
+	td1.innerHTML = `<input type="text" class="form__field" id="fName1" value= "${fName}" >`
+	td2.innerHTML = `<input type="text" class="form__field" id="lName1" value= "${lName}">`;
+	td3.innerHTML = `<input type="text" class="form__field" id="phNumber1"  value= "${phNumber}">`;
+	td4.innerHTML = `<input type="text" class="form__field"  id="email1"  value= "${email}">`;
+	td5.innerHTML = `<input type="text" class="form__field" id="address1"  value= "${address}">`;
+    
 	td6.innerHTML =
-	  "<input type='button' name='del' value ='Delete'  id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
+	"<button type='button' class= 'btn warning' id='edit_button' onclick='changeCon(this)'>Edit</button>";
   
 	td7.innerHTML =
-	  "<input type='button' name='up' value ='Update'  id='edit_button class='w3-button w3-circle w3-lime' onclick='changeCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
-  
+  "<button type='button' class= 'btn danger' id='delete_button'  onclick='delCon(this)'>Delete</button>";
+
 	document.getElementById("tbl").replaceChild(tr, s);
 }
 
 function changeCon(con) {
+  console.log("CHANGE CON IS EXECUTING")
 	var fName =document.getElementById("fName1").value;  
 	var lName = document.getElementById("lName1").value; 
 	var phNumber = document.getElementById("phNumber1").value;
 	var email = document.getElementById("email1").value;
 	var address = document.getElementById("address1").value;
   let contactIdString = $(con).closest("tr").attr('id');
-  console.log(contactIdString)
-  let contactId = (contactIdString.split('"'))[1];
-  contactId = parseInt(contactId);
-	let tmp = {firstname:fName,lastname:lName, phone:phNumber, email:email, address:address,id:contactId}
+	let tmp = {firstname:fName,lastname:lName, phone:phNumber, email:email, address:address,id:contactIdString}
   console.log(tmp)
 	let jsonPayload = JSON.stringify( tmp );
 	let url = urlBase + '/UpdateContact.' + extension;
@@ -423,7 +433,7 @@ function changeCon(con) {
   
 	var s = con.parentNode.parentNode;
 	var tr = document.createElement("tr");
-  
+  tr.setAttribute("id",`${contactIdString}`)
 	var td1 = tr.appendChild(document.createElement("td"));
 	var td2 = tr.appendChild(document.createElement("td"));
 	var td3 = tr.appendChild(document.createElement("td"));
@@ -437,13 +447,12 @@ function changeCon(con) {
 	td3.innerHTML = phNumber;
 	td4.innerHTML = email;
 	td5.innerHTML = address;
-  
-	td6.innerHTML =
-	  "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
-  
+  td6.innerHTML =
+  "<button type='button' class= 'btn warning' id='edit_button' onclick='UpCon(this)'>Edit</button>";
 	td7.innerHTML =
-	  "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+  "<button type='button' class= 'btn danger' id='delete_button'  onclick='delCon(this)'>Delete</button>";
   
+
 	document.getElementById("tbl").replaceChild(tr, s);
 }
 
@@ -469,7 +478,7 @@ function populateTable() {
           let tempAddress = (jsonObject.results[i])["Address"];
           let tempId = (jsonObject.results[i])["ID"];
           var tr = document.createElement("tr");
-          tr.setAttribute("id",`"${tempId}"`)
+          tr.setAttribute("id",`${tempId}`)
 
           var td1 = tr.appendChild(document.createElement("td"));
           var td2 = tr.appendChild(document.createElement("td"));
@@ -483,14 +492,13 @@ function populateTable() {
           td3.innerHTML = tempPhone;
           td4.innerHTML = tempEmail;
           td5.innerHTML = tempAddress;
-        
-          td6.innerHTML =
-            "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
-        
           // td7.innerHTML =
           //   '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
+          td6.innerHTML =
+            "<button type='button' class= 'btn warning' id ='edit_button' onclick='UpCon(this)'>Edit</button>";
           td7.innerHTML =
-            "<button type='button' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+            "<button type='button' class= 'btn danger' id='delete_button'  onclick='delCon(this)'>Delete</button>";
+        
           document.getElementById("tbl").appendChild(tr);
           document.getElementById("addMe").reset();
         
@@ -513,7 +521,9 @@ function addContact() {
   let addEmail = document.getElementById("email").value;
   let addAddress = document.getElementById("address").value;
   //document.getElementById("contactAddResult").innerHTML = "";
-
+  if(!validAddContact(addFirstname,addLastname,addPhone,addEmail)){
+    return;
+  }
   let tmp = {
     firstname: addFirstname,
     userid: userId,
@@ -523,23 +533,26 @@ function addContact() {
     address: addAddress,
   };
   let jsonPayload = JSON.stringify(tmp);
-
+  let tr_id = 0
   let url = urlBase + "/CreateContact." + extension;
 
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  var tr = document.createElement("tr"); // Create table row for new contact
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        //document.getElementById("contactAddResult").innerHTML = "Contact has been added";
+        let jsonObject = JSON.parse(xhr.responseText)
+        tr_id = jsonObject["ID"];
+        console.log(tr_id); // Print new contact id to console
+	tr.setAttribute("id",tr_id)
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
     //document.getElementById("contactAddResult").innerHTML = err.message;
   }
-  var tr = document.createElement("tr");
 
   var td1 = tr.appendChild(document.createElement("td"));
   var td2 = tr.appendChild(document.createElement("td"));
@@ -554,99 +567,195 @@ function addContact() {
   td3.innerHTML = addPhone;
   td4.innerHTML = addEmail;
   td5.innerHTML = addAddress;
-
-  td6.innerHTML =
-    "<button type='button' id='edit_button class='w3-button w3-circle w3-lime' onclick='delCon(this)' <i class='fa-regular fa-trash'></i> </button>";
-
   // td7.innerHTML =
   //   '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
+  td6.innerHTML =
+    "<button type='button' class= 'btn warning' id='edit_button' onclick='UpCon(this)'>Edit</button>";
   td7.innerHTML =
-    "<button type='button' onclick='UpCon(this)' <i class='fa-regular fa-pen-to-square'></i> </button>";
+    "<button type='button' class= 'btn danger' id='delete_button'  onclick='delCon(this)'>Delete</button>";
+  
   document.getElementById("tbl").appendChild(tr);
   document.getElementById("addMe").reset();
-
   showTable();
 }
 
 function searchContactv1() {
-  let srchName = document.getElementById("searchContact").value;
-  document.getElementById("contactSearchResult").innerHTML = "";
+  let srchName = document.getElementById("searchText").value;
+  // document.getElementById("contactSearchResult").innerHTML = "";
 
-  let contactList = "";
 
-  let tmp = { search: srchName, userId: userId };
+  let tmp = { search: srchName, userid: userId };
   let jsonPayload = JSON.stringify(tmp);
 
   let url = urlBase + "/SearchContact." + extension;
-
   let xhr = new XMLHttpRequest();
   xhr.open("POST", url, true);
   xhr.setRequestHeader("Content-type", "application/json; charset=UTF-8");
+  
+  let existing_tr = document.getElementsByTagName("tr")
+
+  for (let i = 0; i < existing_tr.length; i++){
+    existing_tr[i].style.display = "";
+  }
   try {
     xhr.onreadystatechange = function () {
       if (this.readyState == 4 && this.status == 200) {
-        document.getElementById("contactSearchResult").innerHTML =
-          "Contact(s) has been retrieved";
-        let jsonObject = JSON.parse(xhr.responseText);
+        let jsonObject = JSON.parse(xhr.responseText)
+        for (let i = 0; i < jsonObject.length; i++) {
+          let tempFirst = (jsonObject[i])["FirstName"];
+          let tempLast = (jsonObject[i])["LastName"];
+          let tempPhone = (jsonObject[i])["PhoneNumber"];
+          let tempEmail = (jsonObject[i])["Email"];
+          let tempAddress = (jsonObject[i])["Address"];
+          let tempId = (jsonObject[i])["ID"];
+          var tr = document.createElement("tr");
+          tr.setAttribute("id",`"${tempId}"`)
 
-        for (let i = 0; i < jsonObject.results.length; i++) {
-          contactList += jsonObject.results[i];
-          if (i < jsonObject.results.length - 1) {
-            contactList += "<br />\r\n";
-          }
+          var td1 = tr.appendChild(document.createElement("td"));
+          var td2 = tr.appendChild(document.createElement("td"));
+          var td3 = tr.appendChild(document.createElement("td"));
+          var td4 = tr.appendChild(document.createElement("td"));
+          var td5 = tr.appendChild(document.createElement("td"));
+          var td6 = tr.appendChild(document.createElement("td"));
+          var td7 = tr.appendChild(document.createElement("td"));
+          td1.innerHTML = tempFirst;
+          td2.innerHTML = tempLast;
+          td3.innerHTML = tempPhone;
+          td4.innerHTML = tempEmail;
+          td5.innerHTML = tempAddress;
+          // td7.innerHTML =
+          //   '<input type="button" name="up" value="Update" onclick="UpCon(this);" class="btn btn-primary">';
+          td6.innerHTML =
+            "<button type='button' class= 'btn warning' id = 'edit_button' onclick='UpCon(this)'>Edit</button>";
+            td7.innerHTML =
+            "<button type='button' class= 'btn danger' id='delete_button'  onclick='delCon(this)'>Delete</button>";
+          document.getElementById("tbl").appendChild(tr);
+          document.getElementById("addMe").reset();
+        
+
         }
 
-        document.getElementsByTagName("p")[0].innerHTML = contactList;
       }
     };
     xhr.send(jsonPayload);
   } catch (err) {
-    document.getElementById("contactSearchResult").innerHTML = err.message;
+    console.log("error")
   }
+}
+
+
+function validAddContact(firstName, lastName, phone, email,address) { 
+  var fNameErr = lNameErr = phoneErr = emailErr = addressErr = true;
+
+  if (firstName == "") {
+      document.getElementById("fNameMsg").textContent= "Please enter a valid first name."
+      document.getElementById("firstName").style.marginBottom = "10px";
+      document.getElementById("firstName").style.marginTop = "10px";
+  }
+  else {
+    console.log("FIRST name IS VALID");
+    fNameErr = false;
+  }
+
+  if (lastName == "") {     
+    document.getElementById("lNameMsg").textContent= "Please enter a valid last name."
+    document.getElementById("lastName").style.marginBottom = "10px";
+    document.getElementById("lastName").style.marginTop = "10px";
+  }
+  else {
+      console.log("LAST name IS VALID");
+      lNameErr = false;
+  }
+
+  if (phone == "") { 
+    document.getElementById("phoneMsg").textContent= "Please enter a valid phone number."
+    document.getElementById("phNumber").style.marginBottom = "10px";
+    document.getElementById("phNumber").style.marginTop = "10px";
+  }
+  else {
+      var regex = /^[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4}$/;
+
+      if (regex.test(phone) == false) {
+          document.getElementById("phoneMsg").textContent= "Please enter a valid phone number."
+          document.getElementById("phNumber").style.marginTop = "10px";
+          document.getElementById("phNumber").style.marginBottom = "10px";
+          console.log("PHONE IS NOT VALID");
+      }
+
+      else {
+
+          console.log("PHONE IS VALID");
+          phoneErr = false;
+      }
+  }
+
+  if (email == "") {
+      document.getElementById("emailMsg").textContent= "Please enter a valid email."
+      document.getElementById("email").style.marginBottom = "10px";
+      document.getElementById("email").style.marginTop = "10px";
+      console.log("EMAIL IS BLANK");
+  }
+  else {
+      var regex = /^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/;
+
+      if (regex.test(email) == false) {
+          document.getElementById("emailMsg").textContent= "Please enter a valid email."
+          document.getElementById("emailMsg").style.marginBottom = "10px";
+          document.getElementById("emailMsg").style.marginTop = "10px";
+          console.log("EMAIL IS NOT VALID");
+      }
+
+      else {
+          console.log("EMAIL IS VALID");
+          emailErr = false;
+      }
+  }
+  if(address == ""){
+    document.getElementById("addressMsg").textContent= "Please enter a valid address."
+    document.getElementById("address").style.marginBottom = "10px";
+    document.getElementById("address").style.marginTop = "10px";
+  }
+  else{
+    addressErr=false;
+  }
+
+  if ((phoneErr || emailErr || fNameErr || lNameErr ||addressErr) == true) {
+      document.getElementById("inputInfo").style.height = "650px"
+      return false;
+
+  }
+
+  return true;
+
 }
 
 function searchContacts() {
-  const content = document.getElementById("searchText").value;
-  const selections = content.toUpperCase();
-
+  const content = document.getElementById("searchText");
+  const selections = content.value.toUpperCase().split(' ');
   const table = document.getElementById("tbl");
-  const tr = table.getElementsByTagName("tr");
+  const tr = table.getElementsByTagName("tr");// Table Row
+
   for (let i = 0; i < tr.length; i++) {
-    const fN = tr[i].getElementsByTagName("td")[0];
-    const lN = tr[i].getElementsByTagName("td")[1];
-    const pN = tr[i].getElementsByTagName("td")[2];
-    const email = tr[i].getElementsByTagName("td")[3];
-    const address = tr[i].getElementsByTagName("td")[4];
+      const td_fn = tr[i].getElementsByTagName("td")[0];// Table Data: First Name
+      const td_ln = tr[i].getElementsByTagName("td")[1];// Table Data: Last Name
 
-    if (fN && lN && pN && email && address) {
-      const txtValue_fn = fN.textContent || fN.innerText;
-      const txtValue_ln = lN.textContent || lN.innerText;
-      const txtValue_pn = pN.textContent || pN.innerText;
-      const txtValue_email = email.textContent || email.innerHTML;
-      const txtValue_address = address.textContent || address.innerHTML;
-      tr[i].style.display = "none";
+      if (td_fn && td_ln) {
+          const txtValue_fn = td_fn.textContent || td_fn.innerText;
+          const txtValue_ln = td_ln.textContent || td_ln.innerText;
+          tr[i].style.display = "none";
 
-      for (let j = 0; j < selections.length; j++) {
-        if (txtValue_fn.toUpperCase().indexOf(selections[j]) > -1) {
-          tr[i].style.display = "";
-        }
-        if (txtValue_ln.toUpperCase().indexOf(selections[j]) > -1) {
-          tr[i].style.display = "";
-        }
-        if (txtValue_pn.toUpperCase().indexOf(selections[j]) > -1) {
-          tr[i].style.display = "";
-        }
-
-        if (txtValue_email.toUpperCase().indexOf(selections[j]) > -1) {
-          tr[i].style.display = "";
-        }
-        if (txtValue_address.toUpperCase().indexOf(selections[j]) > -1) {
-          tr[i].style.display = "";
-        }
+          for (selection of selections) {
+              if (txtValue_fn.toUpperCase().indexOf(selection) > -1) {
+                  tr[i].style.display = "";
+              }
+              if (txtValue_ln.toUpperCase().indexOf(selection) > -1) {
+                  tr[i].style.display = "";
+              }
+          }
       }
-    }
   }
 }
+
 
 function showTable() {
   var x = document.getElementById("addMe");
