@@ -51,7 +51,7 @@
               style="font-size: 27px; color: rgba(42, 42, 42, 0.9)"
             ></i> -->
             <i class="fa-sharp fa-regular fa-plus"></i>
-            <div>Add User</div>
+            <div>Add Contact</div>
           </div>
         </div>
         
@@ -83,12 +83,13 @@
         </div>
       </div>
       <div class="add">
-        <form method="post" name="sample" id="addMe">
+        <form method="post" name="sample" id="addMe" style="display: none">
           <div class="addContacts" id="inputInfo">
             <label for="chk" class="add-text" aria-hidden="true"
               >Add Contact</label
             >
             <input
+              required
               class="addContacts"
               type="text"
               name="fName"
@@ -97,6 +98,7 @@
               id="firstName"
             />
             <input
+              required
               class="addContacts"
               type="text"
               name="lName"
@@ -105,6 +107,7 @@
               id="lastName"
             />
             <input
+              required
               type="text"
               name="phNumber"
               placeholder="XXX-XXX-XXXX"
@@ -113,6 +116,7 @@
               class="addContacts"
             />
             <input
+              required
               type="text"
               name="email"
               placeholder="name@email.com"
@@ -121,6 +125,7 @@
               class="addContacts"
             />
             <input
+              required
               type="text"
               name="address"
               placeholder="Street Address"
@@ -128,6 +133,11 @@
               id="address"
               class="addContacts"
             />
+            <span id = "fNameMsg"></span>
+            <span id = "lNameMsg"></span>
+            <span id = "emailMsg"></span>
+            <span id = "phoneMsg"></span>
+            <span id = "addressMsg"></span>
             <button type="button" onclick="addContact()">Add</button>
           </div>
         </form>
