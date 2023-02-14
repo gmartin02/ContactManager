@@ -14,7 +14,7 @@ function doLogin() {
   let login = document.getElementById("loginName").value;
   let password = document.getElementById("loginPassword").value;
   //	var hash = md5( password );
-  if (!login|| !password)
+  if (!login && !password)
   {
     console.log("Empty form fields");
     document.getElementById("loginResult").innerHTML = "Please enter a valid username/password";
@@ -259,8 +259,6 @@ function checkPassword() {
   let pSpecInput = document.getElementById("passSpec");
   let pLenInput = document.getElementById("passLen");
   let totalform = document.getElementById("wholeForm");
-  let contactForm = document.getElementById("inputInfo");
-  contactForm.style.minHeight = "570px"
   var temp = document.getElementById("checkPassword");
   temp.style.display = "block";
   totalform.style.minHeight = "570px";
