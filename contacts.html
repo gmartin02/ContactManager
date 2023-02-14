@@ -77,9 +77,11 @@
             ></a>
           </div>
         </div>
-        <div class="logOut" onclick="doLogout()">
-          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+        <div class = "column">        
+          <div type = "button" class="logOut" onclick="doLogout()">
+          <i style= "padding-right:10px; justify-content: center;" class="fa-solid fa-arrow-right-from-bracket"></i>
           <div>Log Out</div>
+        </div>
         </div>
       </div>
       <div class="add">
@@ -138,13 +140,13 @@
             <span id = "emailMsg"></span>
             <span id = "phoneMsg"></span>
             <span id = "addressMsg"></span>
-            <button type="button" onclick="addContact()">Add</button>
+            <button class= "addContactButton" type="button" onclick="addContact()">Add</button>
           </div>
         </form>
       </div>
 
       <div id="tab">
-        <table id="tbl" class="table"">
+        <table id="tbl" class="table">
           <thead class="table-row">
             <tr class="border_bottom" >
               <th>First Name</th>
@@ -152,6 +154,8 @@
               <th>Phone Number</th>
               <th>Email</th>
               <th>Street Address</th>
+              <th></th>
+              <th></th>
               <!-- <i class="fa-regular fa-pen-to-square"></i> -->
               <!-- <th>Update</th> -->
             </tr>
